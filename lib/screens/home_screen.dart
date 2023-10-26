@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       //? Cambiar la pantalla
       body: PageView(
-        children: [
+        children: const [
           CustomScreen(color: Colors.blue),
           CustomScreen(color: Colors.pink),
           CustomScreen(color: Colors.indigo),
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.blue,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white.withOpacity(0.5),
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.verified_user_outlined), label: 'User'),
           BottomNavigationBarItem(
@@ -56,7 +56,7 @@ class CustomScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: color,
-      child: Center(
+      child: const Center(
         child: Text('Custom Screen'),
       ),
     );
