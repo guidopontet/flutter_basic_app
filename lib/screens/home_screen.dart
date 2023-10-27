@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int currentPage = 0;
+  int currentPage = 1;
+  final PageController pageController = PageController(initialPage: 1);
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +22,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
       //? Cambiar la pantalla
       body: PageView(
+        controller: pageController,
+        physics: NeverScrollableScrollPhysics(),
         children: const [
           CustomScreen(color: Colors.blue),
           CustomScreen(color: Colors.pink),
           CustomScreen(color: Colors.indigo),
         ],
       ),
+      // body: currentPage == 0
+      //       ? CustomScreen(color:  Colors.pink )
+      //       : currentPage == 1
+      //           ? CustomScreen(color:  Colors.indigo )
+      //           : CustomScreen(color:  Colors.green ),
+
       //* Tabs
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPage,
         onTap: (index) {
           currentPage = index;
+
+          pageController.animateToPage(index,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOut);
 
           setState(() {});
         },
@@ -41,6 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.verified_user_outlined), label: 'User'),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.car_rental_outlined), label: 'Cart'),
         ],
       ),
     );
